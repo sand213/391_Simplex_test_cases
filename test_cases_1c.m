@@ -45,6 +45,23 @@ classdef test_cases_1c < matlab.unittest.TestCase
             %             testCase.verifyEqual(ind,[3,4,5].', AbsTol = 1e-5);
             testCase.verifyEqual(exitflag,-1, AbsTol = 1e-5);
         end
+        
+        function infeasible_2(testCase)
+            m = 3;
+            n = 5;
+
+            A = [1 2 1 0 0 ;
+                 3 2 0 1 0;
+                 1 3 0 0 -1];
+
+            b = [8 12 13].';
+
+            c = [-1 -1 0 0 0];
+
+            [z,x,pi,ind,exitflag] = fullsimplex(A,b,c,m,n);
+
+            testCase.verifyEqual(exitflag,1, AbsTol = 1e-5);
+        end
 
         function another_cocktail_unbounded(testCase)
             % Unbounded cocktail problem as seem in tutorial
